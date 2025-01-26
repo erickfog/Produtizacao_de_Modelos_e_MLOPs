@@ -56,7 +56,7 @@ Abaixo está o diagrama da arquitetura do projeto:
 │                         `1.0-jqp-initial-data-exploration`.
 │
 ├── pyproject.toml     <- Project configuration file with package metadata for 
-│                         tech_challenge_fase3 and configuration for tools like black
+│                         mlops and configuration for tools like black
 │
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
 │
@@ -68,9 +68,9 @@ Abaixo está o diagrama da arquitetura do projeto:
 │
 ├── setup.cfg          <- Configuration file for flake8
 │
-└── tech_challenge_fase3   <- Source code for use in this project.
+└── mlops   <- Source code for use in this project.
     │
-    ├── __init__.py             <- Makes tech_challenge_fase3 a Python module
+    ├── __init__.py             <- Makes mlops a Python module
     │
     ├── config.py               <- Store useful variables and configuration
     │
