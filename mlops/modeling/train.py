@@ -4,7 +4,7 @@ import typer
 from loguru import logger
 from tqdm import tqdm
 
-from tech_challenge_fase3.config import MODELS_DIR, PROCESSED_DATA_DIR
+from mlops.config import MODELS_DIR, PROCESSED_DATA_DIR
 
 app = typer.Typer()
 

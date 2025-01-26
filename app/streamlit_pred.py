@@ -9,6 +9,8 @@ from datetime import datetime
 from ta.trend import EMAIndicator
 from ta.momentum import RSIIndicator
 from ta.volatility import BollingerBands
+import pandas as pd
+import numpy as np
 
 import boto3
 
@@ -59,8 +61,7 @@ def load_model():
     st.success("Modelo carregado com sucesso!")
     return model
 
-import pandas as pd
-import numpy as np
+
 
 def calculate_rsi(data, window=14):
     """
