@@ -1,0 +1,23 @@
+stages:
+  get_data:
+    cmd: python mlops/dataset.py
+    deps:
+      - mlops/dataset.py
+    outs:
+      - data/raw/historical_data_2.parquet
+
+  create_features:
+    cmd: python mlops/features.py
+    deps:
+      - mlops/features.py
+      - data/raw/historical_data_2.parquet
+    outs:
+      - data/processed/features.parquet
+
+  train_model:
+    cmd: python mlops/modeling/train.py
+    deps:
+      - mlops/modeling/train.py
+      - data/processed/features.parquet
+    outs:
+      - models/model.pkl

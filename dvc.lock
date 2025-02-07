@@ -1,0 +1,46 @@
+schema: '2.0'
+stages:
+  get_data:
+    cmd: python mlops/dataset.py
+    deps:
+    - path: mlops/dataset.py
+      hash: md5
+      md5: 98051b1b16cf5c33602eb6a66c9d3903
+      size: 2109
+    outs:
+    - path: data/raw/historical_data_2.parquet
+      hash: md5
+      md5: d5ccd0ac207a8d3cb6569deaff48b89d
+      size: 42839
+  create_features:
+    cmd: python mlops/features.py
+    deps:
+    - path: data/raw/historical_data_2.parquet
+      hash: md5
+      md5: d5ccd0ac207a8d3cb6569deaff48b89d
+      size: 42839
+    - path: mlops/features.py
+      hash: md5
+      md5: 91b4f03a8f0e2f12d7ceef2f1cf1fef5
+      size: 2710
+    outs:
+    - path: data/processed/features.parquet
+      hash: md5
+      md5: 2d0f14c6573c3f6138dee385878473be
+      size: 224859
+  train_model:
+    cmd: python mlops/modeling/train.py
+    deps:
+    - path: data/processed/features.parquet
+      hash: md5
+      md5: 2d0f14c6573c3f6138dee385878473be
+      size: 224859
+    - path: mlops/modeling/train.py
+      hash: md5
+      md5: e17d4b4a8ad65eb069e1b760a57a076c
+      size: 2822
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: 22271f52f5631de71b11688bc9e866f9
+      size: 625
