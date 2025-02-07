@@ -1,30 +1,51 @@
 from pathlib import Path
-
 import typer
+import pandas as pd
+import joblib
+import requests
 from loguru import logger
-from tqdm import tqdm
-
-from mlops.config import MODELS_DIR, PROCESSED_DATA_DIR
+from datetime import datetime
 
 app = typer.Typer()
 
 
 @app.command()
-def main(
-    # ---- REPLACE DEFAULT PATHS AS APPROPRIATE ----
-    features_path: Path = PROCESSED_DATA_DIR / "test_features.csv",
-    model_path: Path = MODELS_DIR / "model.pkl",
-    predictions_path: Path = PROCESSED_DATA_DIR / "test_predictions.csv",
-    # -----------------------------------------
+def predict(
+    model_path: Path = Path("models/rl_model.joblib"),
+    output_path: Path = Path("data/processed/predictions.parquet"),
 ):
-    # ---- REPLACE THIS WITH YOUR OWN CODE ----
-    logger.info("Performing inference for model...")
-    for i in tqdm(range(10), total=10):
-        if i == 5:
-            logger.info("Something happened for iteration 5.")
-    logger.success("Inference complete.")
-    # -----------------------------------------
+    """
+    Faz previsões utilizando o melhor modelo treinado.
+    """
+    try:
+        # Carregar modelo treinado
+        logger.info("Carregando modelo...")
+        model = joblib.load(model_path)
 
+        # Criar entrada de previsão
+        timestamp = datetime.now()
+        X_new = pd.DataFrame({
+            "day_of_week": [timestamp.weekday()],
+            "day_of_month": [timestamp.day],
+            "moving_avg_7": [94472.382736],
+            "moving_avg_30": [94472.382736],
+            "moving_avg_90": [94378.144222]
+        })
+
+        # Fazer previsão
+        prediction = model.predict(X_new)
+        logger.info(f"Preço previsto: {prediction[0]:.2f}")
+
+        # Salvar previsão
+        df_prediction = pd.DataFrame({
+            "timestamp": [timestamp],
+            "predicted_price": prediction
+        })
+        df_prediction.to_parquet(output_path, index=False)
+        logger.success(f"Previsões salvas em {output_path}.")
+
+    except Exception as e:
+        logger.error(f"Erro ao fazer previsões: {e}")
 
 if __name__ == "__main__":
     app()

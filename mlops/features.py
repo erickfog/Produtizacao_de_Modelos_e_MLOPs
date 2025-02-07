@@ -5,7 +5,7 @@ from loguru import logger
 from tqdm import tqdm
 from datetime import datetime
 
-app = typer.Typer()
+#app = typer.Typer()
 
 def calculate_rsi(series: pd.Series, window: int = 14) -> pd.Series:
     """
@@ -57,7 +57,7 @@ def prepare_features(df: pd.DataFrame) -> pd.DataFrame:
 RAW_DATA_DIR = Path("data/raw/") 
 PROCESSED_DATA_DIR = Path("data/processed")
 
-@app.command()
+#@app.command()
 def main(
     input_path: Path = RAW_DATA_DIR / "historical_data_2.parquet",
     output_path: Path = PROCESSED_DATA_DIR / "features.parquet",
@@ -82,4 +82,5 @@ def main(
         logger.error(f"Erro no cálculo de features: {e}")
 
 if __name__ == "__main__":
-    app()
+    main()
+    # app()

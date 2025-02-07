@@ -12,7 +12,7 @@ RAW_DATA_DIR = "data/raw/"
 
 
 
-app = typer.Typer()
+#app = typer.Typer()
 
 
 def get_historical_data(coin: str, days: int = 90) -> pd.DataFrame:
@@ -40,7 +40,7 @@ def get_historical_data(coin: str, days: int = 90) -> pd.DataFrame:
 
 
 
-@app.command()
+#@app.command()
 def fetch_and_upload_data(
     coin: str = 'bitcoin',
     days: int = 90,
@@ -66,4 +66,4 @@ def fetch_and_upload_data(
 
 
 if __name__ == "__main__":
-    app()
+    fetch_and_upload_data()
