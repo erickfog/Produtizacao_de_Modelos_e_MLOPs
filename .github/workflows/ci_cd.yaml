@@ -24,18 +24,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Restaurar Dados Versionados com DVC
-        run: |
-          dvc pull  # Baixa os dados versionados do repositório
-          dvc status  # Verifica status dos arquivos versionados
-
       - name: Executar Testes Unitários
         run: |
           pytest tests/
 
       - name: Executar Pipeline de Dados e Treinamento
         run: |
-          dvc repro  # Executa todas as etapas do pipeline definido no dvc.yaml
+          dvc repro -f # Executa todas as etapas do pipeline definido no dvc.yaml
 
       - name: Salvar Atualizações no DVC e Git
         run: |
