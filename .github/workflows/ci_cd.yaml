@@ -27,7 +27,20 @@ jobs:
       - name: Definir PYTHONPATH
         run: echo "PYTHONPATH=$(pwd)/mlops:$PYTHONPATH" >> $GITHUB_ENV
 
+      # Executar os scripts apenas quando for meia-noite
+      - name: Executar dataset.py
+        run: python3 mlops/dataset.py
+        if: github.event_name == 'schedule'
 
+      - name: Executar features.py
+        run: python3 mlops/features.py
+        if: github.event_name == 'schedule'
+
+      - name: Executar train.py
+        run: python3 mlops/train.py
+        if: github.event_name == 'schedule'
+
+      # Executar testes unitários em ambos os casos: push ou cron
       - name: Executar Testes Unitários
         run: |
           pytest tests/
