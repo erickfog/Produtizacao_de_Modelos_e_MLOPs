@@ -3,8 +3,8 @@ name: CI/CD Pipeline para Previsão do Preço do Bitcoin
 on:
   push:
     branches: [ main ]
-  #schedule:
-  #  - cron: '0 0 * * *'  # Executa diariamente à meia-noite (UTC)
+  schedule:
+    - cron: '0 0 * * *'  # Executa diariamente à meia-noite (UTC)
 
 jobs:
   train-bitcoin-model:
@@ -28,17 +28,17 @@ jobs:
         run: echo "PYTHONPATH=$(pwd)/mlops:$PYTHONPATH" >> $GITHUB_ENV
 
       # Executar os scripts apenas quando for meia-noite
-      #- name: Executar dataset.py
-      #  run: python3 mlops/dataset.py
-        #if: github.event_name == 'schedule'
+      - name: Executar dataset.py
+        run: python3 mlops/dataset.py
+        if: github.event_name == 'schedule'
 
-      #- name: Executar features.py
-      #  run: python3 mlops/features.py
-        #if: github.event_name == 'schedule'
+      - name: Executar features.py
+        run: python3 mlops/features.py
+        if: github.event_name == 'schedule'
 
-      #- name: Executar train.py
-      #  run: python3 mlops/modeling/train.py
-        #if: github.event_name == 'schedule'
+      - name: Executar train.py
+        run: python3 mlops/modeling/train.py
+        if: github.event_name == 'schedule'
 
       # Executar testes unitários em ambos os casos: push ou cron
       - name: Executar Testes Unitários
