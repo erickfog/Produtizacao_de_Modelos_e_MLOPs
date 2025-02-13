@@ -31,14 +31,3 @@ jobs:
       - name: Executar Testes Unitários
         run: |
           pytest tests/
-
-      - name: Executar Pipeline de Dados e Treinamento
-        run: |
-          dvc repro -f # Executa todas as etapas do pipeline definido no dvc.yaml
-
-      - name: Salvar Atualizações no DVC e Git
-        run: |
-          dvc push  # Envia os novos arquivos versionados (ex.: modelo treinado)
-          git add .
-          git commit -m "Atualizando DVC com novos artefatos" || echo "Nada para commitar"
-          git push || echo "Nada para enviar"
