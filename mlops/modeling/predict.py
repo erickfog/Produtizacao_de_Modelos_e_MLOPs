@@ -6,10 +6,7 @@ import requests
 from loguru import logger
 from datetime import datetime
 
-app = typer.Typer()
 
-
-@app.command()
 def predict(
     model_path: Path = Path("models/rl_model.joblib"),
     output_path: Path = Path("data/processed/predictions.parquet"),
@@ -48,4 +45,4 @@ def predict(
         logger.error(f"Erro ao fazer previsões: {e}")
 
 if __name__ == "__main__":
-    app()
+    predict()

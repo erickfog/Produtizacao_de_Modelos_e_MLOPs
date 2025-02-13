@@ -5,14 +5,9 @@ import pandas as pd
 from datetime import datetime
 from loguru import logger
 from tqdm import tqdm
-#from mlops.config import RAW_DATA_DIR
-import boto3
+
 
 RAW_DATA_DIR = "data/raw/" 
-
-
-
-#app = typer.Typer()
 
 
 def get_historical_data(coin: str, days: int = 90) -> pd.DataFrame:
@@ -37,13 +32,9 @@ def get_historical_data(coin: str, days: int = 90) -> pd.DataFrame:
         logger.error(f"Erro ao buscar dados históricos: {e}")
         return pd.DataFrame()
 
-
-
-
-#@app.command()
 def fetch_and_upload_data(
     coin: str = 'bitcoin',
-    days: int = 90,
+    days: int = 180,
 ):
     """
     Busca dados históricos de uma criptomoeda e envia para o S3 com partições.

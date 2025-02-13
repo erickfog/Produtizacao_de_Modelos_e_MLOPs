@@ -16,12 +16,10 @@ from sklearn.ensemble import GradientBoostingRegressor
 PROCESSED_DATA_DIR = Path('data/processed/')
 MODELS_DIR = Path('models/')
 
-#app = typer.Typer()
 
-#@app.command()
 def train_models(
     features_path: Path = PROCESSED_DATA_DIR / "features.parquet",
-    model_path: Path = MODELS_DIR / "model.pkl",
+    model_path: Path = MODELS_DIR / "rl_model.joblib",
 ):
     """
     Treina modelos de regressão utilizando variáveis derivadas.
@@ -66,4 +64,3 @@ def train_models(
 
 if __name__ == "__main__":
     train_models()
-    #app()

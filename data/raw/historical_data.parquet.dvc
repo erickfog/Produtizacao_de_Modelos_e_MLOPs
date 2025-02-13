@@ -1,5 +1,0 @@
-outs:
-- md5: c89402dae0ad3b2fbe575209d54a8a42
-  size: 4299
-  hash: md5
-  path: historical_data.parquet

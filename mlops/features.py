@@ -5,8 +5,6 @@ from loguru import logger
 from tqdm import tqdm
 from datetime import datetime
 
-#app = typer.Typer()
-
 def calculate_rsi(series: pd.Series, window: int = 14) -> pd.Series:
     """
     Calcula o índice de força relativa (RSI).
@@ -83,4 +81,3 @@ def main(
 
 if __name__ == "__main__":
     main()
-    # app()
