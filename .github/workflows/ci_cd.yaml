@@ -24,6 +24,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Definir PYTHONPATH
+        run: echo "PYTHONPATH=$(pwd)/mlops:$PYTHONPATH" >> $GITHUB_ENV
+
+
       - name: Executar Testes Unitários
         run: |
           pytest tests/
