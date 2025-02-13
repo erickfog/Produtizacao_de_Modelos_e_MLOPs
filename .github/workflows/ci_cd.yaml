@@ -37,7 +37,7 @@ jobs:
         #if: github.event_name == 'schedule'
 
       - name: Executar train.py
-        run: python3 mlops/train.py
+        run: python3 mlops/modeling/train.py
         #if: github.event_name == 'schedule'
 
       # Executar testes unitários em ambos os casos: push ou cron
